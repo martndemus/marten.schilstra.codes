@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<head>
+  <meta charset=utf-8 />
+  <meta name=viewport content=width=device-width,initial-scale=1>
+
+  <title>Keeping up with Ember.js -- marten.schilstra.codes</title>
+  <meta name=description content="A look into how I try to keep up with the
+    rapid changes of the Ember.js framework" />
+
+  <link rel=stylesheet href=/assets/style.css />
+<body>
+  <article>
+    <h1>Keeping up with Ember.js</h1>
+    <subtitle>
+      A look into how I try to keep up with the rapid changes of the Ember.js
+      framework
+    </subtitle>
+    <section>
+      <p>
+        <strong><em>Disclaimer: The Ember community is doing monumentous effort
+            right now to make all the points I'm addressing in this post.</em></strong>
+      </p>
+
+      <p>
+        All things Ember move really fast. Even though I consider myself an
+        expert with Ember, I have to confess that I also have trouble to keep up
+        with the rapid pace that Ember changes in.
+      </p>
+    </section>
+
+    <section>
+      <h2>A little backstory</h2>
+
+      <p>
+        I work with a small team of developers on a few Ember apps. One of them,
+        that has not hit production, is being developed using the canary branch
+        of Ember. Two others are, after some good effort on working away
+        deprecations, on 1.13.x. Another one that is not actively developed
+        anymore, because the new canary app will replace it, is on 1.12. The
+        last app we aren't able to  upgrade to 1.13.x, because we used private
+        api that is no longer in 1.13 because of the introduction of Glimmer, it
+        would take a lot of effort to refactor out the mistake we made.
+      </p>
+
+      <p>
+        Our story doesn't even sound so bad, there are many companies that are
+        still stuck at 1.12 or 1.11. I even heard of a company that still had to
+        port their app from using globals to Ember CLI. We could probably
+        upgrade our 1.13.x apps to 2.0 within ample days of the release.
+      </p>
+
+    </section>
+
+    <section>
+      <h2>It's all about keeping up</h2>
+
+      <p>
+        The first step to keeping up with Ember's rapid changes is learning what
+        will change, but that is not enough, after you know what changes, you
+        will have to learn why it will change and what you have to do to make
+        those changes. This can sometimes prove to be very difficult.
+      </p>
+
+      <h3>Finding out what will change and how to change it</h3>
+
+      <p>
+        How do I learn what will change, and how and when to make those changes?
+        By spending a (halve) hour a day on discovering what has happened.
+      </p>
+
+      <p>
+        My primary source is Twitter. A lot of prominent Ember developers are on
+        Twitter, so following them provides a steady stream of new knowledge.
+      </p>
+
+      <p>
+        Another good source is Slack, Ember has it's own Slack community. You
+        will learn about the various problems everyone has by just reading the
+        backlog on various active channels. An added bonus of chat is that you
+        can even ask questions yourself and mostly get an useful answer within
+        an hour or so.
+      </p>
+
+      <p>
+        There is also the official <a href="http://emberjs.com/blog/">blog</a>,
+        <a href="http://emberjs.com/guides/">guides</a> and the
+        <a href="http://emberjs.com/deprecations/v1.x/">deprecations</a> page,
+        but a lot of things (sadly) go undocumented, are just barely documented
+        or are documented later than it could have been.
+      </p>
+
+      <p>
+        I also started watching <a href="reddit.com/r/emberjs">/r/emberjs</a>
+        recently, there can sometimes be things on there that I've missed on the
+        other sources.
+      </p>
+
+      <h3>Keep up now, not later</h3>
+
+      <p>
+        As soon as I know that change will be needed in the future, I will try
+        to deal with it right away. For example: when it was
+        <a href="https://github.com/emberjs/rfcs/pull/15">announced in november
+        2014</a> that components would be the way forward for Ember, we started
+        to move refactor our controllers into components.
+      </p>
+
+      <p>
+        Unless you decide to not upgrade, it is inevitable that you will have to
+        make changes. I think it's best not to delay this, delaying would only
+        make it worse, as that would probably increase the amount of effort
+        needed to make the change.
+      </p>
+    </section>
+
+    <section>
+      <h2>Keeping up battles</h2>
+
+      <h3>Ember 2.0</h3>
+
+      <p>
+        The easiest one for me now is keeping up with the newly added
+        deprecations in the 1.13.x patch series. Once you are up to the point
+        that all views and controllers have been refactored into components,
+        then it's just small mechanical changes. For example: computed
+        property keys that end in <code>@each</code> should be changed to end
+        on <code>[]</code>.
+      </p>
+
+      <h3>Glimmer</h3>
+
+      <p>
+        Glimmer introduces virtual dom, lifecycle hooks and more. The virtual
+        dom part isn't that hard to deal with, because mostly you don't, you
+        only have to add some keys to your <code>{{each}}</code> blocks.
+      </p>
+
+      <p>
+        Dealing with the new lifecycle hooks is a little bit hard, I think that
+        I still don't fully get how to unlock the great potential that is there.
+        When do I use them? How do I use them? The
+        <a href="http://emberjs.com/blog/2015/06/12/ember-1-13-0-released.html#toc_component-lifecycle-hooks">
+        blog post</a> that introduces them is just little more then an
+        enumeration of which lifecycle hook there are.
+      </p>
+
+      <h3>Data Down, Action Up</h3>
+
+      <p>
+        Dealing with DDAU will probably the hardest battle after getting rid of
+        views and controllers. It is much talked about, but never really fully
+        thoroughly explained. Stefan Penner's
+        <a href="https://www.youtube.com/watch?v=vvZEddrClAQ">talk about
+        observers</a> does explain it a little bit.
+      </p>
+
+      <p>
+        The 1.13 blog post mentions that the new Glimmer lifecycle hooks enable
+        you to write DDAU components, but does not mention how.
+      </p>
+    </section>
+
+    <section>
+      <h2>Just a Glimmer in the dark</h2>
+
+      <p>
+        I am afraid that I don't fully grasp the upcoming idioms like the
+        lifecycle hooks and DDAU. That because I don't fully understand it I run
+        the risk of doing it wrong and having to repair it later. That fear is
+        increased with the fresh 2.0 app we are building.
+      </p>
+
+      <h3>Let's light it up</h3>
+
+      <p>
+        It would be super awesome if it would be much more easier to upgrade.
+        I'm going to make it a mission to get something up there that will
+        explain how to prepare your 1.13 / 2.0 apps for the upcoming DDAU flow
+        in 2.1.
+      </p>
+
+      <p>
+        If anyone reading this has an idea how to deal with lifecycle hooks and
+        DDAU then please share it. In the mean time I'll do my bestest to learn
+        how and then to write it up in words.
+      </p>
+    </section>
+  </article>
